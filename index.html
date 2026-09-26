@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Commands Ranked by Importance</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: #161b22;
+            --text-color: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-color: #238636;
+            --accent-hover: #2ea043;
+            --border-color: #30363d;
+            --code-bg: #0d1117;
+            --tag-bg: #1f6feb33;
+            --tag-text: #58a6ff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.2rem;
+            color: #ffffff;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            box-sizing: border-box;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            border-color: var(--tag-text);
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+        }
+
+        .tier-section {
+            margin-bottom: 3rem;
+        }
+
+        .tier-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tier-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #ffffff;
+        }
+
+        .tier-badge {
+            background-color: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .command-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .command-card:hover {
+            border-color: var(--text-muted);
+        }
+
+        .command-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .command-code {
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+            color: var(--tag-text);
+            font-size: 1rem;
+        }
+
+        .command-rank {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--border-color);
+            padding: 0.1rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .command-desc {
+            margin: 0 0 0.75rem 0;
+            color: var(--text-color);
+        }
+
+        .command-example {
+            background-color: var(--code-bg);
+            border-left: 3px solid var(--accent-color);
+            padding: 0.5rem 0.75rem;
+            font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, monospace;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-radius: 0 4px 4px 0;
+            overflow-x: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>GitHub & Git Commands Ranked</h1>
+        <p>Ordered from the most vital day-to-day commands to advanced or rarely used operations.</p>
+    </header>
+
+    <div class="container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Search commands, descriptions, or keywords..." onkeyup="filterCommands()">
+
+        <!-- Tier 1 -->
+        <div class="tier-section" data-tier="1">
+            <div class="tier-header">
+                <h2>Tier 1: Essential Daily Drivers</h2>
+                <span class="tier-badge">Most Important</span>
+            </div>
+
+            <div class="command-card" data-keywords="git clone download repository">
+                <div class="command-title">
+                    <span class="command-code">git clone &lt;url&gt;</span>
+                    <span class="command-rank">Rank #1</span>
+                </div>
+                <p class="command-desc">Clones an existing remote repository down to your local machine.</p>
+                <div class="command-example">git clone https://github.com/user/repo.git</div>
+            </div>
+
+            <div class="command-card" data-keywords="git status check files modified changes">
+                <div class="command-title">
+                    <span class="command-code">git status</span>
+                    <span class="command-rank">Rank #2</span>
+                </div>
+                <p class="command-desc">Shows the state of your working directory and staging area (modified, untracked, staged files).</p>
+                <div class="command-example">git status</div>
+            </div>
+
+            <div class="command-card" data-keywords="git add stage files track">
+                <div class="command-title">
+                    <span class="command-code">git add &lt;file&gt;</span>
+                    <span class="command-rank">Rank #3</span>
+                </div>
+                <p class="command-desc">Adds file changes to the staging area, preparing them to be committed.</p>
+                <div class="command-example">git add . (stages all changes)</div>
+            </div>
+
+            <div class="command-card" data-keywords="git commit save message snapshot">
+                <div class="command-title">
+                    <span class="command-code">git commit -m "message"</span>
+                    <span class="command-rank">Rank #4</span>
+                </div>
+                <p class="command-desc">Records a permanent snapshot of your staged changes with a descriptive message.</p>
+                <div class="command-example">git commit -m "Fix login button alignment"</div>
+            </div>
+
+            <div class="command-card" data-keywords="git push upload remote server github">
+                <div class="command-title">
+                    <span class="command-code">git push origin &lt;branch&gt;</span>
+                    <span class="command-rank">Rank #5</span>
+                </div>
+                <p class="command-desc">Uploads your local commits to the remote repository (e.g., GitHub).</p>
+                <div class="command-example">git push origin main</div>
+            </div>
+
+            <div class="command-card" data-keywords="git pull download update fetch merge remote">
+                <div class="command-title">
+                    <span class="command-code">git pull</span>
+                    <span class="command-rank">Rank #6</span>
+                </div>
+                <p class="command-desc">Fetches changes from the remote repository and immediately merges them into your current local branch.</p>
+                <div class="command-example">git pull origin main</div>
+            </div>
+        </div>
+
+        <!-- Tier 2 -->
+        <div class="tier-section" data-tier="2">
+            <div class="tier-header">
+                <h2>Tier 2: Branching & Collaboration</h2>
+                <span class="tier-badge">Very Important</span>
+            </div>
+
+            <div class="command-card" data-keywords="git branch list create branches">
+                <div class="command-title">
+                    <span class="command-code">git branch</span>
+                    <span class="command-rank">Rank #7</span>
+                </div>
+                <p class="command-desc">Lists all local branches, or creates a new one if specified.</p>
+                <div class="command-example">git branch feature-login</div>
+            </div>
+
+            <div class="command-card" data-keywords="git checkout switch branch">
+                <div class="command-title">
+                    <span class="command-code">git checkout &lt;branch&gt; (or git switch)</span>
+                    <span class="command-rank">Rank #8</span>
+                </div>
+                <p class="command-desc">Switches your active working environment to a different branch.</p>
+                <div class="command-example">git checkout main</div>
+            </div>
+
+            <div class="command-card" data-keywords="git merge combine branches code integration">
+                <div class="command-title">
+                    <span class="command-code">git merge &lt;branch&gt;</span>
+                    <span class="command-rank">Rank #9</span>
+                </div>
+                <p class="command-desc">Joins development histories together by merging a separate branch into your current branch.</p>
+                <div class="command-example">git merge feature-login</div>
+            </div>
+
+            <div class="command-card" data-keywords="git log history timeline commits">
+                <div class="command-title">
+                    <span class="command-code">git log</span>
+                    <span class="command-rank">Rank #10</span>
+                </div>
+                <p class="command-desc">Shows the chronological commit history for the current repository.</p>
+                <div class="command-example">git log --oneline --graph</div>
+            </div>
+
+            <div class="command-card" data-keywords="git diff differences changes view">
+                <div class="command-title">
+                    <span class="command-code">git diff</span>
+                    <span class="command-rank">Rank #11</span>
+                </div>
+                <p class="command-desc">Shows line-by-line differences between files in your working directory and staging area.</p>
+                <div class="command-example">git diff</div>
+            </div>
+        </div>
+
+        <!-- Tier 3 -->
+        <div class="tier-section" data-tier="3">
+            <div class="tier-header">
+                <h2>Tier 3: Setup & Management</h2>
+                <span class="tier-badge">Moderately Important</span>
+            </div>
+
+            <div class="command-card" data-keywords="git init initialize local repo">
+                <div class="command-title">
+                    <span class="command-code">git init</span>
+                    <span class="command-rank">Rank #12</span>
+                </div>
+                <p class="command-desc">Initializes a brand new, empty Git repository in your local project folder.</p>
+                <div class="command-example">git init</div>
+            </div>
+
+            <div class="command-card" data-keywords="git remote connect url server">
+                <div class="command-title">
+                    <span class="command-code">git remote add origin &lt;url&gt;</span>
+                    <span class="command-rank">Rank #13</span>
+                </div>
+                <p class="command-desc">Connects your local repository to a remote server link (like a GitHub repo URL).</p>
+                <div class="command-example">git remote add origin https://github.com/user/repo.git</div>
+            </div>
+
+            <div class="command-card" data-keywords="git stash temporarily save changes wipe clean">
+                <div class="command-title">
+                    <span class="command-code">git stash</span>
+                    <span class="command-rank">Rank #14</span>
+                </div>
+                <p class="command-desc">Temporarily shelves uncommitted changes so you can work on something else, then pop them back later.</p>
+                <div class="command-example">git stash pop</div>
+            </div>
+
+            <div class="command-card" data-keywords="git fetch download updates metadata without merge">
+                <div class="command-title">
+                    <span class="command-code">git fetch</span>
+                    <span class="command-rank">Rank #15</span>
+                </div>
+                <p class="command-desc">Downloads objects and refs from another repository without automatically merging them.</p>
+                <div class="command-example">git fetch origin</div>
+            </div>
+
+            <div class="command-card" data-keywords="git reset undo unstage revert">
+                <div class="command-title">
+                    <span class="command-code">git reset &lt;file&gt;</span>
+                    <span class="command-rank">Rank #16</span>
+                </div>
+                <p class="command-desc">Unstages changes or rolls back commits to a previous state.</p>
+                <div class="command-example">git reset HEAD~1 (keeps code changes, drops commit)</div>
+            </div>
+        </div>
+
+        <!-- Tier 4 -->
+        <div class="tier-section" data-tier="4">
+            <div class="tier-header">
+                <h2>Tier 4: Advanced & Troubleshooting</h2>
+                <span class="tier-badge">Less Common</span>
+            </div>
+
+            <div class="command-card" data-keywords="git rebase rewrite history clean commits">
+                <div class="command-title">
+                    <span class="command-code">git rebase &lt;branch&gt;</span>
+                    <span class="command-rank">Rank #17</span>
+                </div>
+                <p class="command-desc">Reapplies commits on top of another base tip, creating a linear history instead of merging.</p>
+                <div class="command-example">git rebase main</div>
+            </div>
+
+            <div class="command-card" data-keywords="git cherry-pick apply specific commit">
+                <div class="command-title">
+                    <span class="command-code">git cherry-pick &lt;commit-hash&gt;</span>
+                    <span class="command-rank">Rank #18</span>
+                </div>
+                <p class="command-desc">Applies the changes introduced by an existing specific commit onto your current branch.</p>
+                <div class="command-example">git cherry-pick a1b2c3d</div>
+            </div>
+
+            <div class="command-card" data-keywords="git tag release version versioning">
+                <div class="command-title">
+                    <span class="command-code">git tag &lt;tag-name&gt;</span>
+                    <span class="command-rank">Rank #19</span>
+                </div>
+                <p class="command-desc">Creates a permanent marker (like v1.0.0) on a specific commit, often used for releases.</p>
+                <div class="command-example">git tag -a v1.0 -m "Release version 1.0"</div>
+            </div>
+
+            <div class="command-card" data-keywords="git clean delete untracked files garbage collection">
+                <div class="command-title">
+                    <span class="command-code">git clean -fd</span>
+                    <span class="command-rank">Rank #20</span>
+                </div>
+                <p class="command-desc">Deletes untracked files and directories from your working directory.</p>
+                <div class="command-example">git clean -fd</div>
+            </div>
+        </div>
+
+        <!-- Tier 5 -->
+        <div class="tier-section" data-tier="5">
+            <div class="tier-header">
+                <h2>Tier 5: Niche & Administrative</h2>
+                <span class="tier-badge">Rarely Used</span>
+            </div>
+
+            <div class="command-card" data-keywords="git reflog reference log recovery history">
+                <div class="command-title">
+                    <span class="command-code">git reflog</span>
+                    <span class="command-rank">Rank #21</span>
+                </div>
+                <p class="command-desc">Tracks every change to the tip of branches, acting as an ultimate safety net to recover lost commits.</p>
+                <div class="command-example">git reflog</div>
+            </div>
+
+            <div class="command-card" data-keywords="git submodule embedding repositories dependencies">
+                <div class="command-title">
+                    <span class="command-code">git submodule add &lt;url&gt;</span>
+                    <span class="command-rank">Rank #22</span>
+                </div>
+                <p class="command-desc">Allows you to keep a Git repository as a subdirectory of another Git repository.</p>
+                <div class="command-example">git submodule add https://github.com/lib/plugin.git</div>
+            </div>
+
+            <div class="command-card" data-keywords="git bisect binary search find bug regression">
+                <div class="command-title">
+                    <span class="command-code">git bisect</span>
+                    <span class="command-rank">Rank #23</span>
+                </div>
+                <p class="command-desc">Uses binary search to find the exact commit that introduced a bug into the codebase.</p>
+                <div class="command-example">git bisect start; git bisect bad; git bisect good v1.0</div>
+            </div>
+
+            <div class="command-card" data-keywords="git gc garbage collection optimize database">
+                <div class="command-title">
+                    <span class="command-code">git gc</span>
+                    <span class="command-rank">Rank #24</span>
+                </div>
+                <p class="command-desc">Cleans up unnecessary unreferenced files and optimizes the local repository database.</p>
+                <div class="command-example">git gc --prune=now</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>GitHub & Git Command Priority Guide &copy; 2026</p>
+    </footer>
+
+    <script>
+        function filterCommands() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.querySelectorAll('.command-card');
+            let sections = document.querySelectorAll('.tier-section');
+
+            cards.forEach(card => {
+                let text = card.innerText.toLowerCase();
+                let keywords = card.getAttribute('data-keywords') || "";
+                if (text.includes(input) || keywords.includes(input)) {
+                    card.style.display = "";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Hide section if all cards inside it are hidden
+            sections.forEach(section => {
+                let visibleCards = section.querySelectorAll('.command-card:not([style*="display: none"])');
+                if (visibleCards.length === 0) {
+                    section.style.display = "none";
+                } else {
+                    section.style.display = "";
+                }
+            });
+        }
+    </script>
+</body>
+</html>
